@@ -1,0 +1,19 @@
+import dataclasses
+import datetime
+from pyactus.domain import enums
+
+
+@dataclasses.dataclass
+class {{utils.to_camel_case(contract.identifier)}}():
+    """{{contract.acronym}} :: {{contract.name}}.
+
+    {{contract.description}}
+
+    """
+{% for applicability_item in applicability_set %}
+{% if term_set.get_term(applicability_item.term_id) %}
+    {% set term = term_set.get_term(applicability_item.term_id) +%}
+    # {{term.name}} :: {{term.short_description}}
+    {{utils.to_underscore_case(applicability_item.term_id)}} : {{utils.to_python_type(term)}}
+{% endif %}
+{% endfor %}

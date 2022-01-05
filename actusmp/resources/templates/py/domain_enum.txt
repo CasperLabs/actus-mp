@@ -1,0 +1,14 @@
+import enum
+
+
+class {{utils.to_camel_case(term.identifier)}}(enum.Enum):
+    """{{term.acronym}} :: {{term.name}}.
+
+    {{term.description}}
+
+    """
+{% for member in term %}
+    # {{member.name}} :: {{member.description}}
+    {{utils.to_enum_member(member.acronym)}} = {{member.option}}
+
+{% endfor %}
